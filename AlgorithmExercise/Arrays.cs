@@ -81,29 +81,7 @@ namespace AlgorithmExercise
         /* O(n) */
         private void FindMaxProfitInStockTrading(int[] arr)
         {
-            Console.Write($"Max profit that you can make from buy/sell stock is - [{string.Join(", ", arr)}]");
-
-            var buy = 0;
-            var sell = buy + 1;
-            var profit = -1;
-
-            while (sell < arr.Length)
-            {
-                var diff = arr[sell] - arr[buy];
-
-                if (diff > profit)
-                {
-                    profit = diff;
-                    sell++;
-                }
-                else
-                {
-                    buy++;
-                    sell = buy + 1;
-                }
-            }
-
-            Console.WriteLine($" -> {profit}");
+            // check DailyCodingProblem47
         }
 
         /* O(2^n) */

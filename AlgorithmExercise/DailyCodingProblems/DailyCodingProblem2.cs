@@ -32,7 +32,7 @@ namespace AlgorithmExercise.DailyCodingProblems
         }
 
         /*  O(n) */
-        private static int[] RunLogicWithDivision(int[] arr)
+        private int[] RunLogicWithDivision(int[] arr)
         {
             var result = new int[arr.Length];
 
@@ -51,7 +51,7 @@ namespace AlgorithmExercise.DailyCodingProblems
         }
 
         /*  O(n^2) */
-        private static int[] RunLogicWithoutDivision(int[] arr)
+        private int[] RunLogicWithoutDivision(int[] arr)
         {
             var result = new int[arr.Length];
 

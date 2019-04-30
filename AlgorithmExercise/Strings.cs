@@ -7,6 +7,7 @@ namespace AlgorithmExercise
         protected override void RunIntrnal()
         {
             IsAnagram();
+            IsPalindromic();
         }
 
         private void IsAnagram()
@@ -37,6 +38,11 @@ namespace AlgorithmExercise
             }
 
             Console.WriteLine($" -> {result}");
+        }
+
+        private void IsPalindromic()
+        {
+            // check DailyCodingProblem46
         }
     }
 }

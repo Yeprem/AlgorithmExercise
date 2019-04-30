@@ -17,6 +17,16 @@ namespace AlgorithmExercise
             new DailyCodingProblem35().Run();
             new DailyCodingProblem37().Run();
             new DailyCodingProblem40().Run();
+            new DailyCodingProblem41().Run();
+            new DailyCodingProblem42().Run();
+            new DailyCodingProblem44().Run();
+            new DailyCodingProblem46().Run();
+            new DailyCodingProblem47().Run();
+            new DailyCodingProblem49().Run();
+            new DailyCodingProblem50().Run();
+            new DailyCodingProblem57().Run();
+            new DailyCodingProblem58().Run();
+            new DailyCodingProblem61().Run();
 
             new Searching().Run();
             new Sorting().Run();

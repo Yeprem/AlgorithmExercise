@@ -74,11 +74,11 @@ namespace AlgorithmExercise.DailyCodingProblems
 
             return result;
         }
-    }
 
-    class Node
-    {
-        public int Data { get; set; }
-        public Node Next { get; set; }
-    }
+        class Node
+        {
+            public int Data { get; set; }
+            public Node Next { get; set; }
+        }
+    }    
 }
