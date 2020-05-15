@@ -25,8 +25,8 @@ namespace AlgorithmExercise.DailyCodingProblems
         {
             int[] arr = (int[])list[0];
 
-            //var result = RunLogicWithDivision(arr);
-            var result = RunLogicWithoutDivision(arr);
+            var result = RunLogicWithDivision(arr);
+            //var result = RunLogicWithoutDivision(arr);
 
             return result;
         }

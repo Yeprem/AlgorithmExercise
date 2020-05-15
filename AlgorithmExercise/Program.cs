@@ -26,12 +26,12 @@ namespace AlgorithmExercise
             new DailyCodingProblem50().Run();
             new DailyCodingProblem57().Run();
             new DailyCodingProblem58().Run();
-            new DailyCodingProblem61().Run();
 
             new Searching().Run();
             new Sorting().Run();
             new Strings().Run();
             new Arrays().Run();
+            new LinkedLists().Run();
         }
     }
 }

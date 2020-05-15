@@ -58,7 +58,7 @@ namespace AlgorithmExercise.DailyCodingProblems
                 i = 1 -> binary = 0001
                 j = 0
                 2^j = 1 -> binary = 0001
-                i & 2^j = 1 -> because it is greater than one, the item at index j will be added to the set
+                i & 2^j = 1 -> because it is greater than zero, the item at index j will be added to the set
                 .
                 .     
              

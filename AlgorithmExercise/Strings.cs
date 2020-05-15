@@ -7,7 +7,7 @@ namespace AlgorithmExercise
         protected override void RunIntrnal()
         {
             IsAnagram();
-            IsPalindromic();
+            IsPalindromic(new string[] { "anna", "banana" });
         }
 
         private void IsAnagram()
@@ -30,7 +30,7 @@ namespace AlgorithmExercise
                     }
                     else
                     {
-                        result = false;
+                        break;
                     }
                 }
 
@@ -40,9 +40,33 @@ namespace AlgorithmExercise
             Console.WriteLine($" -> {result}");
         }
 
-        private void IsPalindromic()
+        private void IsPalindromic(string[] args)
         {
-            // check DailyCodingProblem46
+            for (int i = 0; i < args.Length; i++)
+            {
+                var subject = args[i];
+
+                var startIndex = 0;
+                var endIndex = subject.Length - 1;
+                var result = false;
+
+                while (startIndex < endIndex)
+                {
+                    if (Equals(subject[startIndex], subject[endIndex]))
+                    {
+                        startIndex++;
+                        endIndex--;
+                        result = true;                        
+                    }
+                    else
+                    {
+                        result = false;
+                        break;
+                    }
+                }
+
+                Console.WriteLine($"Is '{subject}' Palindromic? -> {result}");
+            }
         }
     }
 }

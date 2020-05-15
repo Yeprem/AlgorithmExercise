@@ -15,7 +15,9 @@ namespace AlgorithmExercise
             FindUniquePathInGrid_Recursive();
             FindUniquePathInGrid_Iterative();
             RandomSort((int[])_mainArray.Clone());
-            SubsetWithMaSum((int[])_mainArray.Clone());
+            SubsetWithMaxSum((int[])_mainArray.Clone());
+            LeftRotation((int[])_mainArray.Clone());
+            FindDuplicate();
         }
 
         /* O(logn) */
@@ -149,7 +151,7 @@ namespace AlgorithmExercise
             Console.WriteLine($" -> [{string.Join(", ", arr)}]");
         }
 
-        private void SubsetWithMaSum(int[] arr)
+        private void SubsetWithMaxSum(int[] arr)
         {
             int subsetLength = 3;
             Console.Write($"Subset with {subsetLength} members that sum of item is greater than others [{string.Join(", ", arr)}]");
@@ -187,6 +189,53 @@ namespace AlgorithmExercise
             }
 
             Console.WriteLine($" -> [{string.Join(", ", result)}]");
+        }
+
+        private void LeftRotation(int[] arr)
+        {
+            int count = 4;
+            Console.Write($"Array {string.Join(", ", arr)} will be rotated {count} times");
+
+            int[] result = new int[arr.Length];
+
+            for (int i = 0; i < arr.Length; i++)
+            {
+                int newIndex = arr.Length + (i - count);
+                if (newIndex >= arr.Length)
+                {
+                    newIndex = newIndex - arr.Length;
+                }
+                result[newIndex] = arr[i];
+            }
+
+            Console.WriteLine($" -> {string.Join(", ", result)}");
+        }
+
+        private void FindDuplicate()
+        {
+            var array = new int[] { 1, 4, 5, 6, 2, 4, 6, 1 };
+
+            Console.WriteLine($"Find Duplicate - [{string.Join(", ", array)}]");
+
+            var hash = new HashSet<int>();
+            var duplicate = -1;
+
+            for (int i = 0; i < array.Length; i++)
+            {
+                var current = array[i];
+
+                if (hash.Contains(current))
+                {
+                    duplicate = current;
+                    break;
+                }
+                else
+                {
+                    hash.Add(current);
+                }
+            }
+
+            Console.WriteLine($"Duplicate {duplicate.ToString()}");
         }
     }
 }

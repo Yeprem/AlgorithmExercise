@@ -24,7 +24,7 @@ namespace AlgorithmExercise.DailyCodingProblems
             string subject = (string)list[0];
             int numOfDistinctChar = (int)list[1];
             var startIndex = 0;
-            var endIndex = startIndex + 1;
+            var endIndex = startIndex + numOfDistinctChar;
             var result = string.Empty;
 
             while (endIndex < subject.Length - 1)

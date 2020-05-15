@@ -4,7 +4,7 @@ namespace AlgorithmExercise
 {
     public class Sorting : AlgorithmBase
     {
-        private readonly int[] _mainArray = new int[] { 1, 5, 3, 2, 4 };
+        private readonly int[] _mainArray = new int[] { 1, 5, 3, 6, 4 };
 
         protected override void RunIntrnal()
         {

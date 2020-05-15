@@ -12,7 +12,7 @@ namespace AlgorithmExercise.DailyCodingProblems
     public class DailyCodingProblem47 : DailyCodingProblemBase<int>
     {
         protected override void RunIntrnal()
-        {
+        {   
             int[] set = new int[] { 9, 11, 8, 5, 7, 10 };
             Console.WriteLine($"Maximum profit that you can make from buy/sell that stock is in [{string.Join(", ", set)}] is {RunLogic(set)}");
         }
