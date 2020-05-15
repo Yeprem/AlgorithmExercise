@@ -18,6 +18,7 @@ namespace AlgorithmExercise
             SubsetWithMaxSum((int[])_mainArray.Clone());
             LeftRotation((int[])_mainArray.Clone());
             FindDuplicate();
+            FindCommonElementsBetweenTwoArrays();
         }
 
         /* O(logn) */
@@ -236,6 +237,30 @@ namespace AlgorithmExercise
             }
 
             Console.WriteLine($"Duplicate {duplicate.ToString()}");
+        }
+
+        private void FindCommonElementsBetweenTwoArrays()
+        {
+            var arr1 = new int[] { 1, 5, 12, 3, -15, 52 };
+            var arr2 = new int[] { 3, 1, 6, 5, 57, 13, 17 };
+
+            Console.Write($"Find elemets in common between these arrays - [{string.Join(", ", arr1)}] & [{string.Join(", ", arr2)}] -> ");
+
+            var set = new HashSet<int>();
+
+            for (int i = 0; i < arr1.Length; i++)
+            {
+                set.Add(arr1[i]);
+            }
+
+            for (int i = 0; i < arr2.Length; i++)
+            {
+                if (set.Contains(arr2[i]))
+                {
+                    Console.Write($"{arr2[i]} ");
+                }
+            }
+
         }
     }
 }

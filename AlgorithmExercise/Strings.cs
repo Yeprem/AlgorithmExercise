@@ -8,6 +8,7 @@ namespace AlgorithmExercise
         {
             IsAnagram();
             IsPalindromic(new string[] { "anna", "banana" });
+            DoShareCommonSubstring(new string[] { "anna", "banana" });
         }
 
         private void IsAnagram()
@@ -67,6 +68,33 @@ namespace AlgorithmExercise
 
                 Console.WriteLine($"Is '{subject}' Palindromic? -> {result}");
             }
+        }
+
+        private void DoShareCommonSubstring(string[] args)
+        {
+            var index = 0;
+            var length = 1;
+            var s1 = args[0];
+            var s2 = args[1];
+
+            Console.Write($"Given two strings '{s1}' & '{s2}', determine if they share a common substring.");
+
+            var result = false;
+
+            while (!result && s1.Length > 0)
+            {
+                var substring = s1.Substring(index, length);
+                if (s2.IndexOf(substring) > -1)
+                {
+                    result = true;
+                }
+                else
+                {
+                    s1 = s1.Replace(substring, "");
+                }
+            }
+
+            Console.Write($" -> {result}");
         }
     }
 }
