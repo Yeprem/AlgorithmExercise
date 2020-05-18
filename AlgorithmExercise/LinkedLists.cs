@@ -8,6 +8,7 @@ namespace AlgorithmExercise
         protected override void RunIntrnal()
         {
             PrintListInOrder();
+            NthToLastLinkedListElement();
         }
 
         private void PrintListInOrder()
@@ -59,7 +60,50 @@ namespace AlgorithmExercise
                     break;
                 }
             }
+
+            Console.WriteLine();
         }
+
+        private void NthToLastLinkedListElement()
+        {
+            var queryValues = new List<int> { 1, 2, 3, 5 };
+            var node5 = new ListNode { Value = 5 };
+            var node4 = new ListNode { Value = 4, Next = node5 };
+            var node3 = new ListNode { Value = 3, Next = node4 };
+            var node2 = new ListNode { Value = 2, Next = node3 };
+            var node = new ListNode { Value = 1, Next = node2 };
+
+            foreach (var queryValue in queryValues)
+            {
+                Console.Write($"Given a singly linked list [1 -> 2 -> 3 -> 4 -> 5], what is the {queryValue}th item");
+
+                var actualPointer = node;
+                var secondaryPointer = node;
+
+                for (int i = 0; i < queryValue; i++)
+                {
+                    if (secondaryPointer != null)
+                    {
+                        secondaryPointer = secondaryPointer.Next;
+                    }
+                }
+
+                while (secondaryPointer?.Next != null)
+                {
+                    actualPointer = actualPointer.Next;
+                    secondaryPointer = secondaryPointer.Next;
+                }
+
+                var result = secondaryPointer != null ? actualPointer.Value : -1;
+                Console.WriteLine($" -> { result }");
+            }
+        }
+    }
+
+    class ListNode
+    {
+        public int Value { get; set; }
+        public ListNode Next { get; set; }
     }
 
     class TreeNode

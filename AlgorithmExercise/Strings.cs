@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace AlgorithmExercise
 {
@@ -9,6 +10,7 @@ namespace AlgorithmExercise
             IsAnagram();
             IsPalindromic(new string[] { "anna", "banana" });
             DoShareCommonSubstring(new string[] { "anna", "banana" });
+            HowManyMovementsToMakeAnagram();
         }
 
         private void IsAnagram()
@@ -94,7 +96,47 @@ namespace AlgorithmExercise
                 }
             }
 
-            Console.Write($" -> {result}");
+            Console.WriteLine($" -> {result}");
+        }
+
+        private void HowManyMovementsToMakeAnagram()
+        {
+            var list = new List<(string, string)>
+            {
+                ("ababadefghjklmnioprqustryxzdefghjklmnioprqustryxzdefghjklmnioprqustryxzdefghjklmnioprqustryxzdefghjklmnioprqustryxzdefghjklmnioprqustryxzdefghjklmnioprqustryxzdefghjklmnioprqustryxzdefghjklmnioprqustryxz", "ababcdefghjklmnioprqustryxzdefghjklmnioprqustryxzdefghjklmnioprqustryxzdefghjklmnioprqustryxzdefghjklmnioprqustryxzdefghjklmnioprqustryxzdefghjklmnioprqustryxzdefghjklmnioprqustryxzdefghjklmnioprqustryxz"),
+                ("banana", "anana"),
+                ("ababa", "baaab")
+            };
+
+            for (int t = 0; t < list.Count; t++)
+            {
+                var word1 = list[t].Item1;
+                var word2 = list[t].Item2;
+
+                Console.Write($"Given two strings '{word1}' & '{word2}', how many movements required to make them anagram?");
+
+                var start = DateTime.Now;
+
+                var result = -1;
+
+                if (word1.Length == word2.Length)
+                {
+                    for (int i = 0; i < word1.Length; i++)
+                    {
+                        var index = word2.IndexOf(word1[i]);
+                        if (index != -1)
+                        {
+                            word2 = word2.Substring(0, index) + word2.Substring(index + 1);
+                        }
+                    }
+
+                    result = word2.Length;
+                }
+
+                var end = DateTime.Now;
+
+                Console.WriteLine($" -> {result}. Time Elapsed -> {(end - start).TotalMilliseconds} ms");
+            }
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using AlgorithmExercise.Utilities;
 
 namespace AlgorithmExercise
 {
@@ -19,6 +20,8 @@ namespace AlgorithmExercise
             LeftRotation((int[])_mainArray.Clone());
             FindDuplicate();
             FindCommonElementsBetweenTwoArrays();
+            FindCycle();
+            FindSmallestNumberOfCoins();
         }
 
         /* O(logn) */
@@ -261,6 +264,136 @@ namespace AlgorithmExercise
                 }
             }
 
+        }
+
+        private void FindCycle()
+        {
+            /*             
+                Directives;
+                G -> straight
+                R -> turn right
+                L -> turn left             
+             */
+
+            Console.WriteLine("");
+
+            var commands = new List<string> { "GRRR", "GRLL" };
+
+            for (int a = 0; a < commands.Count; a++)
+            {
+                var command = commands[a];
+
+                Console.Write($"Is {command} creates cycle?");
+
+                var directionsWithIterator = new Dictionary<char, short> { { 'U', -1 }, { 'D', 1 }, { 'R', 1 }, { 'L', -1 } };
+                var visitedPoints = new HashSet<(short, short)> { (0,0) };
+                var direction = ' ';
+                short xPoint = 0;
+                short yPoint = 0;
+                bool isCycleExist = false;
+
+                for (int i = 0; i < command.Length; i++)
+                {
+                    var directive = command[i];
+                    
+                    direction = SetDirection(directive, direction);
+
+                    var iterator = directionsWithIterator[direction];
+
+                    if (direction == 'U' || direction == 'D')
+                    {
+                        yPoint += iterator;
+                    }
+                    else
+                    {
+                        xPoint += iterator;
+                    }
+
+                    if (visitedPoints.Contains((xPoint, yPoint)))
+                    {
+                        isCycleExist = true;
+                        break;
+                    }
+                    else
+                    {
+                        visitedPoints.Add((xPoint, yPoint));
+                    }
+                }                
+
+                Console.WriteLine($" -> {isCycleExist}");
+
+            }   
+            
+            char SetDirection(char directive, char direction) {
+
+                var result = direction;
+
+                if (direction == 'U')
+                {
+                    result = directive == 'R' ?  'R' : 'L';
+                }
+                else if (direction == 'D')
+                {
+                    result = directive == 'R' ? 'L' : 'R';
+                }
+                else if (direction == 'R')
+                {
+                    result = directive == 'R' ? 'D' : 'U';
+                }
+                else if (direction == 'L')
+                {
+                    result = directive == 'R' ? 'U' : 'D';
+                }
+                else
+                {
+                    switch (directive)
+                    {
+                        case 'G':
+                            result = 'R';
+                            break;
+                        case 'R':
+                            result = 'D';
+                            break;
+                        case 'L':
+                            result = 'U';
+                            break;
+                    }
+                }
+
+                return result;
+            }
+        }
+
+        private void FindSmallestNumberOfCoins()
+        {
+            var queryValues = new List<double> { 5.75, 31.26, 0.99 };
+            var coinSystem = new List<double> { 0.01, 0.02, 0.05, 0.1, 0.2, 0.5, 1, 2 }; // British coin system
+
+            foreach (var queryValue in queryValues)
+            {
+                Console.Write($"Smallest number of coins required to find the sum of {queryValue} is ");
+
+                var numberOfCoinsRequired = 0;
+                var coinIndex = coinSystem.Count - 1;
+                var sum = queryValue * 100; // To make division easy
+
+                while (0 < sum)
+                {
+                    var coinValue = coinSystem[coinIndex] * 100;
+
+                    if (coinValue > sum)
+                    {
+                        coinIndex--;
+                        continue;
+                    }                    
+
+                    var numOfCoin = Convert.ToInt32(Math.Floor(sum / coinValue));
+                    sum -= coinValue * numOfCoin;
+                    numberOfCoinsRequired += numOfCoin;
+                }
+
+                Console.WriteLine(numberOfCoinsRequired);
+            }
         }
     }
 }
