@@ -5,10 +5,20 @@ namespace AlgorithmExercise
 {
     public class LinkedLists : AlgorithmBase
     {
+
+        /*
+            
+            To create a stack with push pop and max functions which runs in O(1), 
+            use linked list with max value as a field in node. 
+             
+        */
+
         protected override void RunIntrnal()
         {
             PrintListInOrder();
             NthToLastLinkedListElement();
+            FindCycle();
+            IsLinkdListPalindrome();
         }
 
         private void PrintListInOrder()
@@ -96,6 +106,98 @@ namespace AlgorithmExercise
 
                 var result = secondaryPointer != null ? actualPointer.Value : -1;
                 Console.WriteLine($" -> { result }");
+            }
+        }
+
+        private void FindCycle()
+        {
+            var node5WithCycle = new ListNode { Value = 5 };
+            var node4WithCycle = new ListNode { Value = 4, Next = node5WithCycle };
+            var node3WithCycle = new ListNode { Value = 3, Next = node4WithCycle };
+            var node2WithCycle = new ListNode { Value = 2, Next = node3WithCycle };
+            var nodeWithCycle = new ListNode { Value = 1, Next = node2WithCycle };
+            node5WithCycle.Next = node3WithCycle;
+
+            var node5 = new ListNode { Value = 5 };
+            var node4 = new ListNode { Value = 4, Next = node5 };
+            var node3 = new ListNode { Value = 3, Next = node4 };
+            var node2 = new ListNode { Value = 2, Next = node3 };
+            var node = new ListNode { Value = 1, Next = node2 };
+
+            var queryValues = new List<(string, ListNode)>
+            {
+                ("1 -> 2 -> 3 -> 4 -> 5", node),
+                ("1 -> 2 -> 3 -> 4 -> 5 -> 3", nodeWithCycle)
+            };
+
+            foreach (var queryValue in queryValues)
+            {
+                var result = false;
+                var slowP = queryValue.Item2;
+                var fastP = queryValue.Item2?.Next?.Next;
+
+                while (fastP?.Next != null)
+                {
+                    slowP = slowP.Next;
+                    fastP = fastP.Next.Next;
+
+                    if (slowP.Value == fastP.Value)
+                    {
+                        result = true;
+                        break;
+                    }
+                }                
+
+                Console.WriteLine($"Is LinkedList [{queryValue.Item1}] contains cycle? -> {result}");
+            }
+        }
+        
+        private void IsLinkdListPalindrome()
+        {
+            var node5Palindrome = new ListNode { Value = 1 };
+            var node4Palindrome = new ListNode { Value = 2, Next = node5Palindrome };
+            var node3Palindrome = new ListNode { Value = 3, Next = node4Palindrome };
+            var node2Palindrome = new ListNode { Value = 2, Next = node3Palindrome };
+            var nodePalindrome = new ListNode { Value = 1, Next = node2Palindrome };
+
+            var node5 = new ListNode { Value = 5 };
+            var node4 = new ListNode { Value = 4, Next = node5 };
+            var node3 = new ListNode { Value = 3, Next = node4 };
+            var node2 = new ListNode { Value = 2, Next = node3 };
+            var node = new ListNode { Value = 1, Next = node2 };
+
+            var queryValues = new List<(string, ListNode)>
+            {
+                ("1 -> 2 -> 3 -> 4 -> 5", node),
+                ("1 -> 2 -> 3 -> 2 -> 1", nodePalindrome)
+            };
+
+            foreach (var queryValue in queryValues)
+            {
+                var result = true;
+
+                var currentNode = queryValue.Item2;
+                var stack = new Stack<int>();
+                while (currentNode != null)
+                {
+                    stack.Push(currentNode.Value);
+                    currentNode = currentNode.Next;
+                }
+
+                currentNode = queryValue.Item2;
+                while (stack.Count > 0)
+                {
+                    var currentValue = stack.Pop();
+                    if (currentNode.Value != currentValue)
+                    {
+                        result = false;
+                        break;
+                    }
+
+                    currentNode = currentNode.Next;
+                }
+
+                Console.WriteLine($"Is LinkedList [{queryValue.Item1}] palindrome? -> {result}");
             }
         }
     }
