@@ -37,6 +37,7 @@ namespace AlgorithmExercise
             new Others().Run();
             new Matrixes().Run();
             new BitManupilations().Run();
+            new Trees().Run();
         }
     }
 }

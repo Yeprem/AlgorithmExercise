@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using AlgorithmExercise.Utilities;
 
 namespace AlgorithmExercise
@@ -27,6 +28,8 @@ namespace AlgorithmExercise
             FindTripletsWithZeroSum();
             IsCircularArray_WithTwoMovementDirection();
             IsCircularArray_WithOneMovementDirection();
+            FindSubsetOfTheArray((int[])_mainArray.Clone());
+            AddNumberToANumberInArrayRepresentation();
         }
 
         /* O(logn) */
@@ -666,6 +669,69 @@ namespace AlgorithmExercise
                 }
 
                 Console.WriteLine($"Is [{string.Join(", ", queryValue)}] circular? -> {result}");
+            }
+        }
+
+        private void FindSubsetOfTheArray(int[] arr)
+        {
+            var set = arr.ToList();
+
+            var result = new List<List<int>>();
+
+            result.Add(new List<int>());
+
+            for (int i = 0; i < set.Count; i++)
+            {
+                var current = arr[i];
+                var temp = new List<List<int>>();
+
+                for (int t = 0; t < result.Count; t++)
+                {
+                    var copy = new List<int>(result[t]);
+                    copy.Add(current);
+                    temp.Add(copy);
+                }
+
+                result.AddRange(temp);
+            }
+
+            Console.WriteLine($" Array [{string.Join(", ", set)}] has {result.Count} subsets;");
+            foreach (var item in result)
+            {
+                Console.WriteLine($"[{string.Join(", ", item)}]");
+            }
+        }
+
+        private void AddNumberToANumberInArrayRepresentation()
+        {
+            var baseNum = new int[] { 1, 3, 2, 4 };
+
+            var queryValues = new List<int> { 1, 15, 120, 106 };
+
+            foreach (var queryValue in queryValues)
+            {
+                var remaining = queryValue;
+                var result = new int[baseNum.Length];
+
+                for (int i = baseNum.Length - 1; 0 <= i; i--)
+                {
+                    var current = baseNum[i];
+                    var newNum = current + remaining;
+                    
+                    if (newNum > 10)
+                    {
+                        remaining = newNum / 10;
+                        newNum %= 10;
+                    }
+                    else
+                    {
+                        remaining = 0;
+                    }
+
+                    result[i] = newNum;
+                }
+
+                Console.WriteLine($"Result of Addition of {queryValue} to Array Representation of Number {string.Join("", baseNum)} is {string.Join("", result)}");
             }
         }
     }

@@ -19,6 +19,7 @@ namespace AlgorithmExercise
             NthToLastLinkedListElement();
             FindCycle();
             IsLinkdListPalindrome();
+            ReverseLinkedList();
         }
 
         private void PrintListInOrder()
@@ -199,6 +200,41 @@ namespace AlgorithmExercise
 
                 Console.WriteLine($"Is LinkedList [{queryValue.Item1}] palindrome? -> {result}");
             }
+        }
+
+        private void ReverseLinkedList()
+        {
+            var node5 = new ListNode { Value = 5 };
+            var node4 = new ListNode { Value = 4, Next = node5 };
+            var node3 = new ListNode { Value = 3, Next = node4 };
+            var node2 = new ListNode { Value = 2, Next = node3 };
+            var node = new ListNode { Value = 1, Next = node2 };
+
+            var result = new List<int>();
+
+            var current = node.Next;
+            var previous = node;
+            node.Next = null;
+
+            while (current?.Next != null)
+            {
+                var temp = current.Next;
+                current.Next = previous;
+                previous = current;
+                current = temp;
+            }
+
+            current.Next = previous;
+
+            var iterator = node5;
+            while (iterator != null)
+            {
+                result.Add(iterator.Value);
+                iterator = iterator.Next;
+            }
+
+            Console.WriteLine($"Reversed version of he linked list [1 -> 2 -> 3 -> 4 -> 5] is [{string.Join(" -> ", result)}]");
+
         }
     }
 
